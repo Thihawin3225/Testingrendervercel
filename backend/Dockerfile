@@ -3,7 +3,7 @@ FROM php:8.5-apache
 RUN apt-get update && apt-get install -y \
     git unzip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev \
     libicu-dev libxml2-dev libonig-dev libcurl4-openssl-dev \
-    && docker-php-ext-install pdo_mysql mbstring bcmath gd intl zip opcache
+    && docker-php-ext-install pdo_mysql mbstring bcmath gd intl zip
 
 RUN a2enmod rewrite
 
