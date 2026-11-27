@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'listing_id',
     'cloudinary_public_id',
     'cloudinary_asset_id',
+    'url',
     'cloudinary_resource_type',
     'cloudinary_delivery_type',
     'sort_order',

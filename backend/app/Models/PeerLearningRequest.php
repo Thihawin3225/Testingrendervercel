@@ -15,9 +15,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
     'learning_goal',
     'preferred_mode',
     'preferred_availability',
+    'preferred_start_date',
+    'preferred_end_date',
+    'preferred_start_time',
+    'preferred_end_time',
     'status',
     'availability_id',
-    'campus_location_id',
     'custom_topic_id',
 ])]
 class PeerLearningRequest extends Model
@@ -45,13 +48,8 @@ class PeerLearningRequest extends Model
         return $this->belongsTo(Availability::class, 'availability_id');
     }
 
-    public function campusLocation(): BelongsTo
-    {
-        return $this->belongsTo(CampusLocation::class, 'campus_location_id');
-    }
-
     public function customTopic(): BelongsTo
     {
-        return $this->belongsTo(CustomTopic::class, 'custom_topic_id');
+        return $this->belongsTo(CustomTopic::class, 'custom_topic_id')->withTrashed();
     }
 }

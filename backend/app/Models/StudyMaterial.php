@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable([
     'user_id',
     'subject_offering_id',
+    'custom_topic_id',
     'title',
     'description',
     'original_filename',

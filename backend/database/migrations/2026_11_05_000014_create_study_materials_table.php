@@ -15,7 +15,7 @@ return new class extends Migration
             $table->collation = 'utf8mb4_unicode_ci';
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('subject_offering_id');
+            $table->unsignedBigInteger('subject_offering_id')->nullable();
             $table->string('title', 180);
             $table->text('description')->nullable();
             $table->string('original_filename', 255);
@@ -39,6 +39,7 @@ return new class extends Migration
             $table->foreign('subject_offering_id', 'fk_study_materials_subject_offering')->references('id')->on('subject_offerings')->restrictOnDelete()->cascadeOnUpdate();
         });
         DB::statement('ALTER TABLE `study_materials` ADD CONSTRAINT `chk_study_materials_file_size` CHECK (file_size > 0)');
+        DB::statement('ALTER TABLE study_materials MODIFY subject_offering_id BIGINT UNSIGNED NULL');
     }
 
     public function down(): void

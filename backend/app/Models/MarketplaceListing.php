@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[Fillable([
     'user_id',
@@ -49,5 +50,14 @@ class MarketplaceListing extends Model
     public function listingRequests(): HasMany
     {
         return $this->hasMany(ListingRequest::class, 'listing_id');
+    }
+    public function savedByUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'marketplace_listing_saves',
+            'marketplace_listing_id',
+            'user_id'
+        )->withTimestamps();
     }
 }

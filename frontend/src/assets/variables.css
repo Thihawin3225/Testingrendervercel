@@ -1,0 +1,38 @@
+:root {
+  --navy: #101132;
+  --purple: #6c2dea;
+  --purple2: #8f50f8;
+  --light: #f6f6fd;
+  --page-background: #f7f7fd;
+  --text: #1c2040;
+  --muted: #707591;
+  --line: #e5e3f5;
+  --success: #0c9061;
+  --danger: #d94055;
+  --amber: #b97716;
+  --shadow: 0 8px 28px #2d215b0e;
+  --sidebar-width: 250px;
+  --navbar-height: 70px;
+  --mobile-breakpoint: 760px;
+  --font-sans: Inter, 'Segoe UI', system-ui, sans-serif;
+  --sidebar-gradient: linear-gradient(168deg, #201438, #151438 60%, #48108f 98%);
+  --sidebar-active-gradient: linear-gradient(110deg, #7436f3, #5832ba);
+  --sidebar-padding: 22px 13px;
+  --brand-gap: 10px;
+  --brand-padding: 2px 13px 24px;
+  --sidebar-label-padding: 24px 17px 6px;
+  --sidebar-nav-gap: 10px;
+  --sidebar-nav-padding: 10px 14px;
+  --sidebar-nav-radius: 10px;
+  --navbar-padding: 0 32px;
+  --navbar-search-padding: 11px 14px;
+  --navbar-search-radius: 11px;
+  --avatar-size: 36px;
+  --avatar-radius: 12px;
+  --notification-radius: 10px;
+  --content-padding: 27px 31px 60px;
+  --mobile-content-padding: 18px 13px;
+  --color-background: var(--page-background);
+  --color-heading: var(--text);
+  --color-text: var(--text);
+}

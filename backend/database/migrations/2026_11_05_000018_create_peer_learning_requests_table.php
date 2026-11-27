@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,6 +21,10 @@ return new class extends Migration
             $table->text('learning_goal')->nullable();
             $table->enum('preferred_mode', ['online', 'in_person', 'either'])->default('either');
             $table->text('preferred_availability')->nullable();
+            $table->date('preferred_start_date')->nullable();
+            $table->date('preferred_end_date')->nullable();
+            $table->time('preferred_start_time')->nullable();
+            $table->time('preferred_end_time')->nullable();
             $table->enum('status', ['open', 'matched', 'closed', 'cancelled'])->default('open');
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate();
@@ -30,11 +33,8 @@ return new class extends Migration
             $table->foreign('learner_id', 'fk_peer_learning_requests_learner')->references('id')->on('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreign('subject_offering_id', 'fk_peer_learning_requests_offering')->references('id')->on('subject_offerings')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('availability_id')->nullable()->constrained('availability')->nullOnDelete();
-            $table->foreignId('campus_location_id')->nullable()->constrained('campus_locations')->nullOnDelete();
             $table->foreignId('custom_topic_id')->nullable()->constrained('custom_topics')->restrictOnDelete();
         });
-
-        DB::statement('ALTER TABLE `peer_learning_requests` ADD CONSTRAINT `chk_peer_learning_request_topic` CHECK ((subject_offering_id IS NOT NULL AND custom_topic_id IS NULL) OR (subject_offering_id IS NULL AND custom_topic_id IS NOT NULL))');
     }
 
     public function down(): void

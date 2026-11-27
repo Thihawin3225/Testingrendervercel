@@ -10,15 +10,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable([
+    'name',
+    'email',
+    'password',
+    'role',
+    'status',
+])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+
 
     /**
      * Get the attributes that should be cast.
@@ -101,5 +113,17 @@ class User extends Authenticatable
     public function notifications(): MorphMany
     {
         return $this->morphMany(Notification::class, 'notifiable')->latest();
+    }
+    /**
+     * Marketplace listings saved by this user.
+     */
+    public function savedMarketplaceListings(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            MarketplaceListing::class,
+            'marketplace_listing_saves',
+            'user_id',
+            'marketplace_listing_id'
+        )->withTimestamps();
     }
 }
