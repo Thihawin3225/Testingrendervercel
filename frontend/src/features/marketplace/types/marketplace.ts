@@ -25,6 +25,7 @@ export interface CampusLocation {
   name: string;
   building: string | null;
   display_name: string | null;
+  is_active?: boolean | number;
 }
 
 export interface ListingRequestListing {

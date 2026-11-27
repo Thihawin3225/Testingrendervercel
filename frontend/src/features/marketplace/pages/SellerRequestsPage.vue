@@ -70,7 +70,7 @@ function formatPrice(price: string | null) {
           @click="selectListing(listing)"
         >
           <img
-            v-if="listing.images.length"
+            v-if="listing.images[0]?.url"
             :src="listing.images[0].url"
             :alt="listing.title"
             class="listing-image"
