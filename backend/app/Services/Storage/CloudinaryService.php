@@ -10,10 +10,21 @@ class CloudinaryService
 {
     private Cloudinary $cloudinary;
 
+
     public function __construct()
     {
-        $this->cloudinary = new Cloudinary;
+        $this->cloudinary = new Cloudinary([
+            'cloud' => [
+                'cloud_name' => config('cloudinary.cloud_name'),
+                'api_key' => config('cloudinary.api_key'),
+                'api_secret' => config('cloudinary.api_secret'),
+            ],
+            'url' => [
+                'secure' => true,
+            ],
+        ]);
     }
+
 
     /**
      * Upload one image to Cloudinary.
@@ -115,7 +126,7 @@ class CloudinaryService
         string $format
     ): string {
         if (pathinfo($publicId, PATHINFO_EXTENSION) === '') {
-            $publicId .= '.'.$format;
+            $publicId .= '.' . $format;
         }
 
         return (string) File::authenticated(
